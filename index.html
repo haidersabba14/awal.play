@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>awal.play | اشتراكاتك الترفيهية في مكان واحد</title>
+    <meta
+      name="description"
+      content="awal.play متجر اشتراكات عربية رفيعة المستوى للترفيه، مع اشتراكات STARZPLAY وTOD. اختر ما يناسبك واستمتع بالمحتوى المفضل."
+    />
+    <meta name="theme-color" content="#07111c" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2307111c'/%3E%3Cpath d='M17 21h30v6H17zm0 16h30v6H17zm0-8h30v6H17z' fill='%23f5c66d'/%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <nav class="nav container" aria-label="التنقل الرئيسي">
+          <div class="brand" aria-label="awal.play">
+            <span class="brand-mark">aw</span>
+            <span>awal.play</span>
+          </div>
+
+          <div class="nav-links">
+            <a href="#home">الرئيسية</a>
+            <a href="#plans">الاشتراكات</a>
+            <a href="#contact">تواصل معنا</a>
+          </div>
+
+          <button class="nav-cart-btn" id="cartToggle" type="button" aria-label="فتح السلة">
+            <span>السلة</span>
+            <span class="cart-count" id="cartCount">0</span>
+          </button>
+        </nav>
+      </header>
+
+      <main>
+        <section class="hero" id="home">
+          <div class="container hero-inner">
+            <div class="hero-copy reveal">
+              <p class="eyebrow">متجر اشتراكات مميز</p>
+              <h1>اشتراكاتك الترفيهية في مكان واحد</h1>
+              <p class="subtitle">اختر اشتراكك واستمتع بالمحتوى الذي تحبه</p>
+
+              <div class="hero-actions">
+                <a href="#plans" class="primary-btn">تصفح الاشتراكات</a>
+                <button type="button" class="ghost-btn" id="heroCartBtn">عرض السلة</button>
+              </div>
+
+              <div class="hero-metrics" aria-label="إحصائيات المتجر">
+                <div>
+                  <strong>4</strong>
+                  <span>اشتراكات</span>
+                </div>
+                <div>
+                  <strong>24/7</strong>
+                  <span>تجربة متاحة</span>
+                </div>
+                <div>
+                  <strong>د.ب</strong>
+                  <span>دفع محلي</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="hero-visual reveal" aria-hidden="true">
+              <div class="screen-card main-screen">
+                <div class="mini-label">اشتراك مميز</div>
+                <h3>STARZPLAY</h3>
+                <p>محتوى فاخر بجودة عالية</p>
+                <div class="screen-price">
+                  <span>15</span>
+                  <small>د.ب / سنة</small>
+                </div>
+              </div>
+
+              <div class="floating-badge badge-one">HD</div>
+              <div class="floating-badge badge-two">4K</div>
+              <div class="floating-badge badge-three">تفعيل سريع</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="plans" id="plans">
+          <div class="container">
+            <div class="section-heading reveal">
+              <p>أفضل العروض</p>
+              <h2>اختر اشتراكك المفضل</h2>
+            </div>
+            <div class="plans-grid" id="plansGrid"></div>
+          </div>
+        </section>
+
+        <section class="checkout-section" id="checkout">
+          <div class="container checkout-wrap">
+            <div class="checkout-card reveal">
+              <div class="checkout-head">
+                <p>إتمام الطلب</p>
+                <h3>طلب تجريبي</h3>
+              </div>
+
+              <form id="checkoutForm" novalidate>
+                <div class="field-grid">
+                  <label>
+                    <span>اسم العميل</span>
+                    <input type="text" id="customerName" name="customerName" placeholder="أدخل اسمك الكامل" required />
+                  </label>
+
+                  <label>
+                    <span>البريد الإلكتروني</span>
+                    <input type="email" id="customerEmail" name="customerEmail" placeholder="name@example.com" required />
+                  </label>
+
+                  <label>
+                    <span>رقم الهاتف</span>
+                    <input type="tel" id="customerPhone" name="customerPhone" placeholder="+973 3xxx xxxx" required />
+                  </label>
+
+                  <label>
+                    <span>الطلب</span>
+                    <input type="text" id="orderText" name="orderText" value="لا توجد عناصر في السلة" readonly />
+                  </label>
+                </div>
+
+                <div class="summary-box">
+                  <div class="summary-row">
+                    <span>المجموع</span>
+                    <strong id="checkoutTotal">0.00 د.ب</strong>
+                  </div>
+                </div>
+
+                <button type="submit" class="primary-btn full-width">إتمام الطلب</button>
+                <p class="checkout-message" id="checkoutMessage" aria-live="polite"></p>
+              </form>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer id="contact">
+        <div class="container footer-inner">
+          <div>
+            <div class="footer-brand">awal.play</div>
+            <p>مكتبة اشتراكات ترفيهية بأجواء premium ومحتوى مميز.</p>
+          </div>
+
+          <div class="footer-links">
+            <a href="#home">الرئيسية</a>
+            <a href="#plans">الاشتراكات</a>
+            <a href="#checkout">إتمام الطلب</a>
+          </div>
+
+          <div class="footer-contact">
+            <p>تواصل معنا</p>
+            <a href="mailto:hello@awalplay.example">hello@awalplay.example</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <aside class="cart-panel" id="cartPanel" aria-label="سلة المشتريات">
+      <div class="cart-header">
+        <h3>السلة</h3>
+        <button type="button" id="closeCart" class="close-cart" aria-label="إغلاق السلة">×</button>
+      </div>
+
+      <div class="cart-items" id="cartItems"></div>
+
+      <div class="cart-summary">
+        <div class="summary-row">
+          <span>المجموع الفرعي</span>
+          <strong id="subtotalValue">0.00 د.ب</strong>
+        </div>
+
+        <div class="summary-row total">
+          <span>الإجمالي</span>
+          <strong id="totalValue">0.00 د.ب</strong>
+        </div>
+
+        <div class="cart-actions">
+          <button type="button" class="secondary-btn" id="emptyCartBtn">إفراغ السلة</button>
+          <a href="#checkout" class="primary-btn" id="checkoutLink">إتمام الطلب</a>
+        </div>
+      </div>
+    </aside>
+
+    <div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
