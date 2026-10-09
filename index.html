@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>AwalPlay | المتجر الرقمي</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap');
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#070a12;color:#fff;font-family:Cairo,Arial,sans-serif}
+header{position:sticky;top:0;z-index:10;height:75px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;background:rgba(7,10,18,0.88);backdrop-filter:blur(16px);border-bottom:1px solid #1e2433}
+.logo{color:#fff;text-decoration:none;font-weight:900;font-size:24px;letter-spacing:1px}
+.logo span{color:#f5c66d}
+.header-actions{display:flex;gap:10px;align-items:center}
+.cartTop{border:1px solid #2d3548;background:#111726;color:#fff;border-radius:14px;padding:10px 16px;font:inherit;cursor:pointer;font-weight:700}
+.cartTop b{background:#f5c66d;color:#070a12;border-radius:20px;padding:2px 8px;margin-right:6px}
+.hero{margin:0 auto;padding:90px 6% 70px;max-width:1300px;text-align:center;background:radial-gradient(circle at 50% 20%,#1f356055,transparent 60%)}
+.hero h1{font-size:clamp(38px,6vw,70px);line-height:1.1;margin:15px 0}
+.hero h1 span{color:#f5c66d}
+.hero p{color:#aab2c5;font-size:18px;max-width:600px;margin:0 auto 25px}
+.heroBtn,.pay{display:inline-block;text-decoration:none;background:#f5c66d;color:#070a12;border:0;border-radius:14px;padding:14px 26px;font-weight:900;font-family:inherit;cursor:pointer;transition:.2s}
+.heroBtn:hover,.pay:hover{transform:translateY(-2px);filter:brightness(1.08)}
+.section{max-width:1300px;margin:auto;padding:40px 6%}
+.section h2{font-size:32px;margin:0 0 25px;color:#f5c66d;border-right:4px solid #f5c66d;padding-right:12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+.card{position:relative;background:linear-gradient(145deg,#111726,#0b101b);border:1px solid #222b3f;border-radius:22px;padding:24px;display:flex;flex-direction:column;box-shadow:0 15px 40px rgba(0,0,0,0.4);transition:.2s}
+.card:hover{transform:translateY(-4px);border-color:#f5c66d88}
+.badge{position:absolute;left:18px;top:18px;color:#070a12;background:#f5c66d;padding:4px 10px;border-radius:8px;font-size:12px;font-weight:900}
+.card h3{margin:0 0 5px;font-size:23px;color:#fff}
+.pkg{color:#9da6b8;font-size:15px;font-weight:bold;margin-bottom:15px;min-height:30px}
+.price-box{margin:10px 0 15px;display:flex;align-items:baseline;gap:8px}
+.price{font-size:32px;font-weight:900;color:#f5c66d}
+.period{color:#8b93a5;font-size:13px}
+.features{padding:0;margin:0 0 20px;list-style:none;color:#c5cbd8;flex-grow:1}
+.features li{margin:8px 0;font-size:14px}
+.features li:before{content:'✓';color:#f5c66d;font-weight:900;margin-left:8px}
+.add{width:100%;padding:12px;border-radius:12px;border:1px solid #333e56;background:#1a2336;color:#fff;font:inherit;font-weight:800;cursor:pointer;transition:.2s}
+.add:hover{background:#f5c66d;color:#070a12}
+.checkout-section{max-width:1150px;margin:30px auto;padding:35px;background:#111726;border:1px solid #222b3f;border-radius:24px;display:grid;grid-template-columns:1fr 1.2fr;gap:35px}
+.checkout-section h2{color:#f5c66d;margin:0 0 10px}
+.checkout-section p{color:#9da6b8}
+.form{display:grid;gap:14px}
+.form label{color:#c5cbd8;font-weight:700}
+.form input{display:block;width:100%;margin-top:6px;padding:13px;background:#070a12;border:1px solid #2d3548;border-radius:12px;color:#fff;font:inherit;outline:none}
+.form input:focus{border-color:#f5c66d}
+.cart-section{max-width:1150px;margin:30px auto;padding:35px;background:#111726;border:1px solid #222b3f;border-radius:24px}
+.cartTitle{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.item{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:15px 0;border-bottom:1px solid #1f2738}
+.sub{color:#8b93a5;font-size:13px;margin-top:4px}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{border:1px solid #333e56;background:#1a2336;color:#fff;border-radius:8px;padding:6px 12px;cursor:pointer}
+.qty .del{color:#e89494;background:#2a1818}
+.total{display:flex;justify-content:space-between;font-size:22px;padding:22px 0;font-weight:bold}
+.total b{color:#f5c66d}
+.empty{padding:30px;text-align:center;color:#8b93a5}
+.nav-actions{display:flex;gap:12px;justify-content:center;margin:30px 0;flex-wrap:wrap}
+.nav-actions button{background:#182133;color:#fff;border:1px solid #2d3548;padding:12px 22px;border-radius:14px;font-weight:bold;cursor:pointer}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:100;backdrop-filter:blur(8px)}
+.modal{background:#111726;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:min(550px,92%);max-height:90vh;overflow:auto;padding:30px;border-radius:22px;border:1px solid #2d3548}
+.modal button.close{float:left;background:#1a2336;color:#fff;border:0;padding:8px 14px;border-radius:10px;cursor:pointer}
+.admin-modal{width:min(900px,94%)}
+.admin-row{display:flex;justify-content:space-between;gap:15px;align-items:center;background:#070a12;border:1px solid #222b3f;border-radius:14px;padding:16px;margin:12px 0}
+.admin-row select{padding:9px;border-radius:9px;background:#1a2336;color:#fff;border:1px solid #333e56}
+footer{text-align:center;color:#60687a;padding:40px;font-size:14px}
+@media(max-width:900px){.checkout-section{grid-template-columns:1fr}}
+    </style>
+</head>
+<body>
+<header>
+    <a class="logo" href="#top">AWAL<span>PLAY</span></a>
+    <div class="header-actions">
+        <button class="cartTop" onclick="scrollToCart()">🛒 السلة <b id="count">0</b></button>
+    </div>
+</header>
+
+<main id="top">
+    <section class="hero">
+        <div style="color:#f5c66d;font-weight:800;margin-bottom:8px">⭐ أفضل سعر في البحرين • تفعيل سريع ورسمي وآمن</div>
+        <h1>مكتبة الاشتراكات الرقمية<br><span>شاهد VIP, TOD & STARZPLAY</span></h1>
+        <p>أفلام • مسلسلات • رياضة • حفلات • بجودات متنوعة تناسب جميع أجهزتك.</p>
+        <a href="#packages" class="heroBtn">استعرض الباقات ↓</a>
+    </section>
+
+    <div class="nav-actions">
+        <button onclick="openMyOrders()">📦 استعلام عن مشترياتي</button>
+        <button onclick="openAdminLogin()">🛠️ لوحة التحكم</button>
+    </div>
+
+    <!-- جميع الباقات -->
+    <section id="packages" class="section">
+        <h2>🔥 الباقات المتاحة</h2>
+        <div class="grid" id="productsGrid"></div>
+    </section>
+
+    <!-- مراجعة الطلب -->
+    <section class="checkout-section">
+        <div>
+            <h2>📝 بيانات الطلب</h2>
+            <p>أدخل بياناتك الأساسية لتجهيز رسالة الطلب مباشرة وإرسالها عبر واتساب بكل سهولة.</p>
+        </div>
+        <div class="form">
+            <label>الاسم الكامل <input id="clientName" placeholder="اكتب اسمك"></label>
+            <label>البريد الإلكتروني <input id="clientEmail" type="email" placeholder="example@mail.com"></label>
+            <label>رقم الهاتف <input id="clientPhone" placeholder="+973 ..."></label>
+        </div>
+    </section>
+
+    <!-- السلة -->
+    <section class="cart-section" id="cartSection">
+        <div class="cartTitle">
+            <h2>🛒 سلة المشتريات</h2>
+            <span id="cartHint" style="color:#8b93a5">راجع اشتراكاتك قبل الإرسال</span>
+        </div>
+        <div id="cartItems"></div>
+        <div class="total">
+            <span>الإجمالي الكلي</span>
+            <b id="cartTotal">0.00 د.ب</b>
+        </div>
+        <button class="pay" id="whatsappBtn" style="width:100%;font-size:18px;padding:16px">إرسال الطلب عبر واتساب ↗</button>
+    </section>
+</main>
+
+<footer>
+    AwalPlay © 2026 — جميع الحقوق محفوظة | خدمة عملاء ودعم مستمر
+</footer>
+
+<!-- نافذة مشترياتي -->
+<div id="myOrdersModal" class="overlay">
+    <div class="modal">
+        <button class="close" onclick="closeMyOrders()">✕</button>
+        <h2>📦 مشترياتي السابقة</h2>
+        <input id="lookupPhone" placeholder="أدخل رقم هاتفك للبحث" style="width:100%;padding:12px;margin:10px 0;background:#070a12;border:1px solid #2d3548;border-radius:10px;color:#fff">
+        <button class="add" onclick="searchMyOrders()">بحث</button>
+        <div id="myOrdersResult" style="margin-top:15px"></div>
+    </div>
+</div>
+
+<!-- نافذة دخول الإدارة -->
+<div id="adminLoginModal" class="overlay">
+    <div class="modal">
+        <button class="close" onclick="closeAdminLogin()">✕</button>
+        <h2>🛠️ دخول لوحة الإدارة</h2>
+        <input id="adminPinInput" type="password" placeholder="أدخل رمز الإدارة" style="width:100%;padding:12px;margin:10px 0;background:#070a12;border:1px solid #2d3548;border-radius:10px;color:#fff">
+        <button class="add" onclick="verifyAdmin()">تسجيل الدخول</button>
+    </div>
+</div>
+
+<!-- لوحة التحكم -->
+<div id="adminPanelModal" class="overlay">
+    <div class="modal admin-modal">
+        <button class="close" onclick="closeAdminPanel()">✕</button>
+        <h2>🛠️ لوحة تحكم الطلبات</h2>
+        <input id="adminSearchInput" placeholder="🔎 بحث برقم الطلب (مثال: AW-...)" oninput="filterAdminOrders()" style="width:100%;padding:12px;margin:10px 0;background:#070a12;border:1px solid #2d3548;border-radius:10px;color:#fff">
+        <div id="adminOrdersList"></div>
+    </div>
+</div>
+
+<script>
+const WHATSAPP_NUMBER = "97334041875";
+const STORAGE_KEY = "awalPlayUltimateOrdersV3";
+const CART_KEY = "awalPlayUltimateCartV3";
+
+const products = [
+    {
+        "id": "starz_it_1yr",
+        "service": "STARZPLAY",
+        "name": "الدوري الإيطالي فقط",
+        "price": 15,
+        "period": "سنة كاملة",
+        "badge": "STARZPLAY",
+        "features": [
+            "تفعيل سريع بعد الدفع مباشرة",
+            "يعمل على جميع الأجهزة",
+            "تلفزيون • كمبيوتر • جوال • تابلت",
+            "محتوى مميز بجودة عالية",
+            "مسلسلات عالمية",
+            "أفلام حصرية"
+        ]
+    },
+    {
+        "id": "tod_mob_1yr",
+        "service": "TOD",
+        "name": "Mobile",
+        "price": 25,
+        "period": "سنة كاملة",
+        "badge": "TOD",
+        "features": [
+            "جوال فقط",
+            "جهاز واحد فقط على الجوال",
+            "جميع المحتوى والترفيه"
+        ]
+    },
+    {
+        "id": "tod_hd_1yr",
+        "service": "TOD",
+        "name": "HD",
+        "price": 35,
+        "period": "سنة كاملة",
+        "badge": "HD",
+        "features": [
+            "جميع الأجهزة",
+            "جودة HD",
+            "مباريات • أفلام • مسلسلات",
+            "قنوات رياضية وترفيهية"
+        ]
+    },
+    {
+        "id": "tod_4k_1yr",
+        "service": "TOD",
+        "name": "4K",
+        "price": 50,
+        "period": "سنة كاملة",
+        "badge": "4K",
+        "features": [
+            "جميع الأجهزة",
+            "جودة 4K",
+            "مباريات • أفلام • مسلسلات",
+            "قنوات رياضية وترفيهية"
+        ]
+    },
+    {
+        "id": "shahid_mob_1yr",
+        "service": "شاهد",
+        "name": "باقة VIP موبايل",
+        "price": 12,
+        "period": "سنة كاملة",
+        "badge": "شاهد VIP",
+        "features": [
+            "أفلام • مسلسلات • رياضة • حفلات",
+            "بدون رياضة | أفلام & مسلسلات",
+            "مشاهدة على جهاز واحد",
+            "يعمل على الآيباد أو الهاتف فقط"
+        ]
+    },
+    {
+        "id": "shahid_vip_1yr",
+        "service": "شاهد",
+        "name": "باقة VIP",
+        "price": 21,
+        "period": "سنة كاملة",
+        "badge": "الأكثر طلباً",
+        "features": [
+            "أفلام • مسلسلات • رياضة • حفلات",
+            "بدون رياضة | أفلام & مسلسلات",
+            "مشاهدة على جهازين",
+            "يعمل على جميع الأجهزة",
+            "تلفزيونين على نفس شبكة الإنترنت أو تلفزيون مع جهاز آخر"
+        ]
+    },
+    {
+        "id": "shahid_vip_3mo",
+        "service": "شاهد",
+        "name": "باقة VIP",
+        "price": 12,
+        "period": "3 أشهر",
+        "badge": "3 أشهر",
+        "features": [
+            "أفلام • مسلسلات • رياضة • حفلات",
+            "بدون رياضة | أفلام & مسلسلات",
+            "مشاهدة على جهازين",
+            "يعمل على جميع الأجهزة"
+        ]
+    },
+    {
+        "id": "shahid_sport_1yr",
+        "service": "شاهد",
+        "name": "باقة VIP الرياضي",
+        "price": 47,
+        "period": "سنة كاملة",
+        "badge": "رياضي",
+        "features": [
+            "رياضة | أفلام & مسلسلات",
+            "مشاهدة على جهازين",
+            "يعمل على جميع الأجهزة",
+            "تلفزيونين على نفس شبكة الإنترنت أو تلفزيون مع جهاز آخر"
+        ]
+    },
+    {
+        "id": "shahid_all_1yr",
+        "service": "شاهد",
+        "name": "باقة VIP الشامل",
+        "price": 66,
+        "period": "سنة كاملة",
+        "badge": "الشامل الملكي",
+        "features": [
+            "حفلات | رياضة | أفلام & مسلسلات",
+            "مشاهدة على 4 أجهزة",
+            "يعمل على جميع الأجهزة",
+            "يعمل على أجهزة وشبكات إنترنت مختلفة بشكل متزامن"
+        ]
+    },
+    {
+        "id": "shahid_all_3mo",
+        "service": "شاهد",
+        "name": "باقة VIP الشامل",
+        "price": 24,
+        "period": "3 أشهر",
+        "badge": "شامل",
+        "features": [
+            "حفلات | رياضة | أفلام & مسلسلات",
+            "مشاهدة على 4 أجهزة",
+            "يعمل على جميع الأجهزة",
+            "يعمل على أجهزة وشبكات إنترنت مختلفة بشكل متزامن"
+        ]
+    }
+];
+
+let cart = JSON.parse(localStorage.getItem(CART_KEY) || "[]");
+let orders = JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+
+const $ = id => document.getElementById(id);
+const money = n => Number(n).toFixed(2) + ' د.ب';
+const getProd = id => products.find(p => p.id === id);
+
+function saveCart() { localStorage.setItem(CART_KEY, JSON.stringify(cart)); }
+function saveOrders() { localStorage.setItem(STORAGE_KEY, JSON.stringify(orders)); }
+
+function renderStore() {
+    document.getElementById('productsGrid').innerHTML = products.map(p => `
+        <article class="card">
+            <span class="badge">${p.badge}</span>
+            <h3>${p.service}</h3>
+            <div class="pkg">${p.name} (${p.period})</div>
+            <div class="price-box">
+                <span class="price">${p.price} <small>د.ب</small></span>
+            </div>
+            <ul class="features">${p.features.map(f => `<li>${f}</li>`).join('')}</ul>
+            <button class="add" onclick="addToCart('${p.id}')">أضف للسلة</button>
+        </article>
+    `).join('');
+}
+
+function renderCart() {
+    let totalQty = 0, totalPrice = 0;
+    if (!cart.length) {
+        document.getElementById('cartItems').innerHTML = '<div class="empty">السلة فارغة حالياً — اختر باقتك المفضلة للبدء</div>';
+    } else {
+        document.getElementById('cartItems').innerHTML = cart.map(i => {
+            let p = getProd(i.id);
+            if (!p) return '';
+            let lineTotal = p.price * i.qty;
+            totalQty += i.qty;
+            totalPrice += lineTotal;
+            return `
+                <div class="item">
+                    <div>
+                        <b>${p.service} — ${p.name} (${p.period})</b>
+                        <div class="sub">${p.price} د.ب × ${i.qty} = ${money(lineTotal)}</div>
+                    </div>
+                    <div class="qty">
+                        <button onclick="changeQty('${p.id}', -1)">−</button>
+                        <span>${i.qty}</span>
+                        <button onclick="changeQty('${p.id}', 1)">+</button>
+                        <button class="del" onclick="removeFromCart('${p.id}')">حذف</button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+    document.getElementById('count').textContent = totalQty;
+    document.getElementById('cartTotal').textContent = money(totalPrice);
+    document.getElementById('whatsappBtn').disabled = !cart.length;
+}
+
+function addToCart(id) {
+    let item = cart.find(x => x.id === id);
+    if (item) item.qty++;
+    else cart.push({ id, qty: 1 });
+    saveCart();
+    renderCart();
+}
+
+function changeQty(id, delta) {
+    let item = cart.find(x => x.id === id);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty < 1) cart = cart.filter(x => x.id !== id);
+    saveCart();
+    renderCart();
+}
+
+function removeFromCart(id) {
+    cart = cart.filter(x => x.id !== id);
+    saveCart();
+    renderCart();
+}
+
+function scrollToCart() {
+    document.getElementById('cartSection').scrollIntoView({ behavior: 'smooth' });
+}
+
+document.getElementById('whatsappBtn').onclick = () => {
+    if (!cart.length) return alert('السلة فارغة!');
+    let name = document.getElementById('clientName').value.trim();
+    let email = document.getElementById('clientEmail').value.trim();
+    let phone = document.getElementById('clientPhone').value.trim();
+    if (!name || !email || !phone) return alert('يرجى تعبئة الاسم والبريد الإلكتروني ورقم الهاتف أولاً');
+
+    let orderId = 'AWL-' + Math.floor(100000 + Math.random() * 900000);
+    let totalPrice = cart.reduce((s, i) => s + getProd(i.id).price * i.qty, 0);
+
+    let itemsDetails = cart.map(i => {
+        let p = getProd(i.id);
+        return `• ${p.service} - ${p.name} (${p.period})\n  الكمية: ${i.qty} | السعر: ${money(p.price * i.qty)}`;
+    }).join('\n\n');
+
+    let newOrder = {
+        id: orderId,
+        name,
+        email,
+        phone,
+        items: cart.map(i => ({ name: `${getProd(i.id).service} (${getProd(i.id).name})`, qty: i.qty, price: getProd(i.id).price })),
+        total: totalPrice,
+        status: "جديد",
+        created: new Date().toISOString()
+    };
+
+    orders.unshift(newOrder);
+    saveOrders();
+    localStorage.setItem("awal_client_phone", phone);
+
+    let msg = `🛒 طلب جديد من متجر AwalPlay\n\n📋 رقم الطلب: ${orderId}\n👤 اسم العميل: ${name}\n📱 رقم الهاتف: ${phone}\n📧 البريد: ${email}\n\n📦 تفاصيل الاشتراكات:\n${itemsDetails}\n\n━━━━━━━━━━━━━━\n💰 الإجمالي الكلي: ${money(totalPrice)}\n━━━━━━━━━━━━━━\n🌐 تم إنشاء الطلب وجاهز للتفعيل`;
+
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=` + encodeURIComponent(msg), '_blank');
+    
+    cart = [];
+    saveCart();
+    renderCart();
+    alert(`تم تجهيز طلبك برقم: ${orderId} وتحويلك إلى واتساب بنجاح!`);
+};
+
+// مشترياتي
+function openMyOrders() { document.getElementById('myOrdersModal').style.display = 'block'; let ph = localStorage.getItem("awal_client_phone"); if(ph) { document.getElementById('lookupPhone').value = ph; searchMyOrders(); } }
+function closeMyOrders() { document.getElementById('myOrdersModal').style.display = 'none'; }
+function searchMyOrders() {
+    let ph = document.getElementById('lookupPhone').value.trim();
+    if(!ph) return alert('أدخل رقم الهاتف');
+    let mine = orders.filter(o => o.phone === ph);
+    document.getElementById('myOrdersResult').innerHTML = mine.length ? mine.map(o => `
+        <div style="background:#070a12;border:1px solid #222b3f;padding:14px;border-radius:12px;margin:10px 0">
+            <b>رقم الطلب: ${o.id}</b><br>
+            حالة الطلب: <span style="color:#f5c66d">${o.status}</span><br>
+            المبلغ: ${money(o.total)}<br>
+            <div style="font-size:13px;color:#8b93a5;margin-top:6px">${o.items.map(x => `${x.name} (×${x.qty})`).join(' • ')}</div>
+        </div>
+    `).join('') : '<div class="empty">لا توجد طلبات محفوظة مرتبطة بهذا الرقم</div>';
+}
+
+// الإدارة
+const ADMIN_PIN = "AWAL2026";
+function openAdminLogin() { document.getElementById('adminLoginModal').style.display = 'block'; }
+function closeAdminLogin() { document.getElementById('adminLoginModal').style.display = 'none'; }
+function verifyAdmin() {
+    if(document.getElementById('adminPinInput').value !== ADMIN_PIN) return alert('رمز الإدارة غير صحيح');
+    closeAdminLogin();
+    document.getElementById('adminPanelModal').style.display = 'block';
+    renderAdminOrders();
+}
+function closeAdminPanel() { document.getElementById('adminPanelModal').style.display = 'none'; }
+
+function renderAdminOrders(list = orders) {
+    let statuses = ["جديد", "قيد المعالجة", "تم التفعيل", "مكتمل", "ملغي"];
+    document.getElementById('adminOrdersList').innerHTML = list.length ? list.map((o, idx) => {
+        let originalIndex = orders.indexOf(o);
+        return `
+        <div class="admin-row">
+            <div>
+                <b>${o.id}</b> — <span style="color:#f5c66d">${o.name}</span> (${o.phone})<br>
+                <div style="font-size:13px;color:#8b93a5;margin:4px 0">${o.items.map(x => `${x.name} (×${x.qty})`).join(' • ')}</div>
+                💰 <b>${money(o.total)}</b> | 🕒 ${new Date(o.created).toLocaleString('ar-BH')}
+            </div>
+            <div>
+                <select onchange="updateStatus(${originalIndex}, this.value)">
+                    ${statuses.map(s => `<option ${o.status === s ? "selected" : ""}>${s}</option>`).join('')}
+                </select>
+            </div>
+        </div>`;
+    }).join('') : '<div class="empty">لا توجد طلبات مسجلة</div>';
+}
+
+function updateStatus(index, newStatus) {
+    orders[index].status = newStatus;
+    saveOrders();
+    renderAdminOrders();
+}
+
+function filterAdminOrders() {
+    let q = document.getElementById('adminSearchInput').value.trim().toUpperCase();
+    let filtered = orders.filter(o => o.id.toUpperCase().includes(q) || o.phone.includes(q) || o.name.toUpperCase().includes(q));
+    renderAdminOrders(filtered);
+}
+
+renderStore();
+renderCart();
+</script>
+</body>
+</html>
